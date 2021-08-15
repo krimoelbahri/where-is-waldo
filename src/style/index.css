@@ -1,0 +1,19 @@
+@import-normalize; /* bring in normalize.css styles */
+
+/* rest of app styles */
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+}
+#root {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 60px 1fr;
+	height: 100%;
+	width: 100%;
+}
