@@ -3,6 +3,7 @@ import {
 	onAuthStateChanged,
 	sendPasswordResetEmail,
 	signInWithEmailAndPassword,
+	signInAnonymously,
 	signOut,
 	updateEmail,
 	updatePassword,
@@ -25,7 +26,9 @@ export function AuthProvider({ children }) {
 	function login(email, password) {
 		return signInWithEmailAndPassword(auth, email, password);
 	}
-
+	function guestLogin() {
+		return signInAnonymously(auth);
+	}
 	function logout() {
 		return signOut(auth);
 	}
@@ -44,6 +47,7 @@ export function AuthProvider({ children }) {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			console.log(user ? true : false);
 			setCurrentUser(user);
 			setLoading(false);
 		});
@@ -54,6 +58,7 @@ export function AuthProvider({ children }) {
 	const value = {
 		currentUser,
 		login,
+		guestLogin,
 		signup,
 		logout,
 		resetPassword,
