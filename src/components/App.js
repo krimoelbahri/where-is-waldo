@@ -1,9 +1,12 @@
 import "../style/App.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
+import { HomePrivateRoute, LoginPrivateRoute } from "./PrivateRoute";
+import { AuthProvider } from "../context/AuthContext";
 import Home from "./Home";
 import SignUp from "./SignUp";
-import { AuthProvider } from "../context/AuthContext";
+import LogIn from "./LogIn";
 import styled from "styled-components";
+
 const Header = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -20,8 +23,9 @@ function App() {
 					<h1>Wher's Waldo</h1>
 				</Header>
 				<Switch>
-					<Route exact path='/' component={Home} />
-					<Route exact path='/signup' component={SignUp} />
+					<HomePrivateRoute exact path='/' component={Home} />
+					<LoginPrivateRoute exact path='/login' component={LogIn} />
+					<LoginPrivateRoute exact path='/signup' component={SignUp} />
 				</Switch>
 			</AuthProvider>
 		</BrowserRouter>
