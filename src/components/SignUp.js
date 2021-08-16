@@ -99,7 +99,7 @@ export default function SignUp() {
 					</Button>
 				</Div>
 				<p>
-					already have an account? <Link to='/'>Sign In</Link>
+					already have an account? <Link to='/login'>Log In</Link>
 				</p>
 			</Form>
 		</>
