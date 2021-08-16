@@ -3,6 +3,25 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import styled from "styled-components";
 
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 100px auto;
+	border: 1px solid grey;
+	min-width: 300px;
+	height: 350px;
+	justify-content: center;
+`;
+const Title = styled.h2`
+	display: flex;
+	align-items: center;
+	height: 30px;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	flex-direction: row;
+`;
 const Form = styled.form`
 	display: flex;
 	width: 90%;
@@ -67,7 +86,8 @@ export default function LogIn() {
 	}
 
 	return (
-		<>
+		<Container>
+			<Title>Sign in to play</Title>
 			<Form onSubmit={handleSubmit}>
 				{error && <p>{error}</p>}
 				<Div className='form-group'>
@@ -91,6 +111,6 @@ export default function LogIn() {
 				</Div>
 			</Form>
 			<GuestButton onClick={handleGuest}>Play as Guest</GuestButton>
-		</>
+		</Container>
 	);
 }
