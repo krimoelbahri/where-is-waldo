@@ -1,5 +1,5 @@
 import "../style/App.css";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { HashRouter, Switch } from "react-router-dom";
 import { HomePrivateRoute, LoginPrivateRoute } from "./PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 import Home from "./Home";
@@ -17,7 +17,7 @@ const Header = styled.div`
 `;
 function App() {
 	return (
-		<BrowserRouter className='App'>
+		<HashRouter className='App'>
 			<AuthProvider>
 				<Header className='App-header'>
 					<h1>Wher's Waldo</h1>
@@ -28,7 +28,7 @@ function App() {
 					<LoginPrivateRoute exact path='/signup' component={SignUp} />
 				</Switch>
 			</AuthProvider>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 
