@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import styled from "styled-components";
 
@@ -63,14 +63,12 @@ export default function LogIn() {
 	const passwordRef = useRef();
 	const [error, setError] = useState("");
 	const { login, guestLogin } = useAuth();
-	const history = useHistory();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
 			setError("");
 			await login(emailRef.current.value, passwordRef.current.value);
-			history.push("/");
 		} catch (error) {
 			return setError("could not sign in");
 		}
@@ -79,7 +77,6 @@ export default function LogIn() {
 		try {
 			setError("");
 			await guestLogin();
-			history.push("/");
 		} catch (error) {
 			return setError("could not sign in");
 		}
