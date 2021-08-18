@@ -1,7 +1,7 @@
 {
   "name": "where-is-waldo",
   "version": "0.1.0",
-  "homepage": "http://krimoelbahri.github.io/",
+  "homepage": "http://krimoelbahri.github.io/where-is-waldo/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
