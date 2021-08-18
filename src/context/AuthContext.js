@@ -1,12 +1,10 @@
 import {
 	createUserWithEmailAndPassword,
+	updateProfile,
 	onAuthStateChanged,
-	sendPasswordResetEmail,
 	signInWithEmailAndPassword,
 	signInAnonymously,
 	signOut,
-	updateEmail,
-	updatePassword,
 } from "firebase/auth";
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
@@ -17,6 +15,7 @@ export function useAuth() {
 }
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
+	const [currentName, setCurrentName] = useState();
 	const [loading, setLoading] = useState(true);
 
 	function signup(email, password) {
@@ -26,6 +25,9 @@ export function AuthProvider({ children }) {
 	function login(email, password) {
 		return signInWithEmailAndPassword(auth, email, password);
 	}
+	function updateProfileName(name) {
+		return updateProfile(auth.currentUser, { displayName: name });
+	}
 	function guestLogin() {
 		return signInAnonymously(auth);
 	}
@@ -33,37 +35,26 @@ export function AuthProvider({ children }) {
 		return signOut(auth);
 	}
 
-	function resetPassword(email) {
-		return sendPasswordResetEmail(auth, email);
-	}
-
-	function setUpdatedEmail(email) {
-		return updateEmail(currentUser, email);
-	}
-
-	function setUpdatedPassword(password) {
-		return updatePassword(currentUser, password);
-	}
-
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			console.log(user ? true : false);
+			if (user) {
+				updateProfile(user, { displayName: currentName });
+			}
 			setCurrentUser(user);
 			setLoading(false);
 		});
 
 		return unsubscribe;
-	}, []);
+	}, [currentName]);
 
 	const value = {
 		currentUser,
+		setCurrentName,
 		login,
+		updateProfileName,
 		guestLogin,
 		signup,
 		logout,
-		resetPassword,
-		setUpdatedEmail,
-		setUpdatedPassword,
 	};
 
 	return (
