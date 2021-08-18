@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import styled from "styled-components";
 
@@ -39,13 +39,13 @@ const Button = styled.button`
 	border-radius: 5px;
 `;
 export default function SignUp() {
+	const fullNameRef = useRef();
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
-	const { signup } = useAuth();
+	const { signup, setCurrentName } = useAuth();
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const history = useHistory();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -59,8 +59,8 @@ export default function SignUp() {
 		try {
 			setError("");
 			setIsLoading(true);
+			setCurrentName(fullNameRef.current.value);
 			await signup(emailRef.current.value, passwordRef.current.value);
-			history.push("/");
 		} catch (error) {
 			return setError("could not sign up");
 		}
@@ -71,6 +71,10 @@ export default function SignUp() {
 		<>
 			<Form onSubmit={handleSubmit}>
 				{error && <h1>{error}</h1>}
+				<Div className='form-group'>
+					<label htmlFor='fullName'> Full Name</label>
+					<Input id='fullName' type='text' ref={fullNameRef} required />
+				</Div>
 				<Div className='form-group'>
 					<label htmlFor='SignUpEmail'> Email</label>
 					<Input id='SignUpEmail' type='email' ref={emailRef} required />
