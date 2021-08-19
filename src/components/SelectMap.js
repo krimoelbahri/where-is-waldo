@@ -34,7 +34,6 @@ const Image = styled.img`
 
 export default function SelectMap(props) {
 	function handleImageClick(e) {
-		e.target.style.border = "1px solid red";
 		props.setMapSrc(e.target.currentSrc);
 		props.setMap(e.target.alt);
 	}
