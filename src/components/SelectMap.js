@@ -21,7 +21,7 @@ const FlexR = styled.div`
 `;
 const MapsContainer = styled(FlexR)`
 	width: 90%;
-	height: 40%;
+	height: 60%;
 `;
 const MapContainer = styled.div`
 	width: 30%;
@@ -34,6 +34,7 @@ const Image = styled.img`
 
 export default function SelectMap(props) {
 	const { setMap, setMapSrc, setDifficulty } = props;
+
 	function handleImageClick(e) {
 		setMapSrc(e.target.currentSrc);
 		setMap(e.target.alt);
