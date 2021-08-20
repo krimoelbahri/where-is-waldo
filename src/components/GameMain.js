@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
 import CharMenu from "./CharMenu";
+import Timer from "./Timer";
 
 const FlexR = styled.div`
 	width: 100%;
@@ -41,6 +42,7 @@ export default function GameMain(props) {
 		mapData,
 		imgSrc,
 	} = props;
+	const [timeInSeconds, setTimeInSeconds] = useState(0);
 	const [Data, setData] = useState([]);
 	const [posX, setPosX] = useState("");
 	const [posY, setPosY] = useState("");
@@ -81,6 +83,7 @@ export default function GameMain(props) {
 	function checkGameOver() {
 		if (charArray.length === 1) {
 			setGameOver(true);
+
 			history.push("/scoreboard");
 		}
 	}
@@ -115,6 +118,9 @@ export default function GameMain(props) {
 								</div>
 							);
 						})}
+						<FlexC>
+							<Timer setTimeInSeconds={setTimeInSeconds} />
+						</FlexC>
 						<FlexC>
 							<button onClick={handleGoBack}>Go Back</button>
 						</FlexC>
