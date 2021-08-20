@@ -51,13 +51,10 @@ export default function Home() {
 			{!loading && (
 				<GameMain
 					setMap={setMap}
-					setMapSrc={setMapSrc}
 					setDifficulty={setDifficulty}
 					setLoading={setLoading}
 					setMapData={setMapData}
 					mapData={mapData}
-					map={map}
-					difficulty={difficulty}
 					imgSrc={mapSrc}
 				/>
 			)}
