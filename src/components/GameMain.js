@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
 import CharMenu from "./CharMenu";
+
 const FlexR = styled.div`
 	width: 100%;
 	height: 80px;
@@ -45,6 +47,7 @@ export default function GameMain(props) {
 	const [displayCharMenu, setDisplayCharMenu] = useState(false);
 	const [charArray, setCharArray] = useState([]);
 	const [gameOver, setGameOver] = useState(false);
+	const history = useHistory();
 
 	function handleClick(e) {
 		let border = e.target.getBoundingClientRect();
@@ -57,7 +60,7 @@ export default function GameMain(props) {
 		setMap(false);
 		setDifficulty(false);
 		setLoading(true);
-		setMapData(false);
+		setMapData();
 	}
 	function checkIfCharFound(e) {
 		setDisplayCharMenu((display) => !display);
@@ -78,6 +81,7 @@ export default function GameMain(props) {
 	function checkGameOver() {
 		if (charArray.length === 1) {
 			setGameOver(true);
+			history.push("/scoreboard");
 		}
 	}
 	useEffect(() => {
