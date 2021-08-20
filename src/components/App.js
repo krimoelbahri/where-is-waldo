@@ -1,6 +1,6 @@
 import "../style/App.css";
 import React from "react";
-import { HashRouter, Switch } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import { HomePrivateRoute, LoginPrivateRoute } from "./PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 import { DataProvider } from "../context/DataContext";
@@ -8,6 +8,7 @@ import Home from "./Home";
 import Header from "./Header";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
+import ScoreBoard from "./ScoreBoard";
 import styled from "styled-components";
 
 const HeaderContainer = styled.div`
@@ -30,6 +31,7 @@ function App() {
 						<HomePrivateRoute exact path='/' component={Home} />
 						<LoginPrivateRoute exact path='/login' component={LogIn} />
 						<LoginPrivateRoute exact path='/signup' component={SignUp} />
+						<Route exact path='/scoreboard' component={ScoreBoard} />
 					</Switch>
 				</DataProvider>
 			</AuthProvider>
