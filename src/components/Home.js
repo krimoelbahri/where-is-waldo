@@ -51,7 +51,9 @@ export default function Home() {
 			{!loading && (
 				<GameMain
 					setMap={setMap}
+					map={map}
 					setDifficulty={setDifficulty}
+					difficulty={difficulty}
 					setLoading={setLoading}
 					setMapData={setMapData}
 					mapData={mapData}
