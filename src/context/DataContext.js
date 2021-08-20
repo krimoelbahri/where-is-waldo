@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 
 const DataContext = React.createContext();
@@ -11,8 +11,10 @@ export function DataProvider({ children }) {
 		const data = await getDoc(doc(db, collection, document));
 		return data;
 	}
-
-	const value = { getData };
+	async function setData(collectionName, data) {
+		await setDoc(doc(collection(db, collectionName)), data);
+	}
+	const value = { getData, setData };
 
 	return (
 		<DataContext.Provider value={value}>
