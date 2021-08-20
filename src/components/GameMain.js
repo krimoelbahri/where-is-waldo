@@ -31,6 +31,14 @@ const Image = styled.img`
 	height: 100%;
 `;
 export default function GameMain(props) {
+	const {
+		setMap,
+		setDifficulty,
+		setLoading,
+		setMapData,
+		mapData,
+		imgSrc,
+	} = props;
 	const [Data, setData] = useState([]);
 	const [posX, setPosX] = useState("");
 	const [posY, setPosY] = useState("");
@@ -42,17 +50,17 @@ export default function GameMain(props) {
 		let border = e.target.getBoundingClientRect();
 		setPosX(e.clientX - border.left);
 		setPosY(e.clientY - border.top);
-		setDisplayCharMenu(true);
+		setDisplayCharMenu((display) => !display);
 	}
 
 	function handleGoBack() {
-		props.setMap(false);
-		props.setDifficulty(false);
-		props.setLoading(true);
-		props.setMapData(false);
+		setMap(false);
+		setDifficulty(false);
+		setLoading(true);
+		setMapData(false);
 	}
 	function checkIfCharFound(e) {
-		setDisplayCharMenu(false);
+		setDisplayCharMenu((display) => !display);
 		let i = e.target.id;
 		console.log(charArray[i]);
 		if (
@@ -74,13 +82,13 @@ export default function GameMain(props) {
 	}
 	useEffect(() => {
 		setGameOver(false);
-		setData(Object.keys(props.mapData));
+		setData(Object.keys(mapData));
 		setCharArray((arr) => {
-			return Object.keys(props.mapData).map((char) => {
-				return [...arr, props.mapData[char]];
+			return Object.keys(mapData).map((char) => {
+				return [...arr, mapData[char]];
 			});
 		});
-	}, [props.mapData]);
+	}, [mapData]);
 
 	return (
 		<>
@@ -97,9 +105,9 @@ export default function GameMain(props) {
 									}}
 									key={i}>
 									<CharContainer>
-										<Image src={props.mapData[char]["imgUrl"]} alt='Char' />
+										<Image src={mapData[char]["imgUrl"]} alt='Char' />
 									</CharContainer>
-									<h4>{props.mapData[char]["name"]}</h4>
+									<h4>{mapData[char]["name"]}</h4>
 								</div>
 							);
 						})}
@@ -109,7 +117,7 @@ export default function GameMain(props) {
 					</FlexR>
 
 					<ImageContainer>
-						<Image onClick={handleClick} src={props.imgSrc} alt='Game' />
+						<Image onClick={handleClick} src={imgSrc} alt='Game' />
 					</ImageContainer>
 
 					{displayCharMenu && (

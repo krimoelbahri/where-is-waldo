@@ -6,7 +6,7 @@ import Map3 from "../assets/gameImage3.jpg";
 
 const Container = styled.div`
 	width: 90%;
-	height: 100%;
+	height: 80%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -16,8 +16,8 @@ const FlexR = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
-	width: 30%;
+	justify-content: space-evenly;
+	width: 25%;
 `;
 const MapsContainer = styled(FlexR)`
 	width: 90%;
@@ -33,12 +33,13 @@ const Image = styled.img`
 `;
 
 export default function SelectMap(props) {
+	const { setMap, setMapSrc, setDifficulty } = props;
 	function handleImageClick(e) {
-		props.setMapSrc(e.target.currentSrc);
-		props.setMap(e.target.alt);
+		setMapSrc(e.target.currentSrc);
+		setMap(e.target.alt);
 	}
 	function handleDifficultyClick(e) {
-		props.setDifficulty(e.target.value);
+		setDifficulty(e.target.value);
 	}
 
 	return (

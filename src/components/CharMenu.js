@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-	display: ${(props) => (props.isDisplay ? "flex" : "none")};
+	display: ${({ isDisplay }) => (isDisplay ? "flex" : "none")};
 	position: absolute;
-	left: ${(props) => props.posX + 10}px;
-	top: ${(props) => props.posY + 120}px;
+	left: ${({ posX }) => posX + 30}px;
+	top: ${({ posY }) => posY + 120}px;
 	width: 70px;
 	flex-direction: column;
 	justify-content: center;
@@ -20,14 +20,12 @@ const Div = styled.div`
 	margin-bottom: 5px;
 `;
 export default function CharMenu(props) {
+	const { display, posX, posY, charArray, checkIfCharFound } = props;
 	return (
-		<Container
-			isDisplay={props.display}
-			posX={props.posX}
-			posY={props.posY}>
-			{props.charArray.map((char, i) => {
+		<Container isDisplay={display} posX={posX} posY={posY}>
+			{charArray.map((char, i) => {
 				return (
-					<Div key={char + i} onClick={props.checkIfCharFound} id={i}>
+					<Div key={char + i} onClick={checkIfCharFound} id={i}>
 						{char[0].name}
 					</Div>
 				);
