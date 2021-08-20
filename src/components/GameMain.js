@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
+import { useData } from "../context/DataContext";
+import { useAuth } from "../context/AuthContext";
 import CharMenu from "./CharMenu";
 import Timer from "./Timer";
 
@@ -36,20 +38,24 @@ const Image = styled.img`
 export default function GameMain(props) {
 	const {
 		setMap,
+		map,
 		setDifficulty,
+		difficulty,
 		setLoading,
 		setMapData,
 		mapData,
 		imgSrc,
 	} = props;
 	const [timeInSeconds, setTimeInSeconds] = useState(0);
-	const [Data, setData] = useState([]);
+	const [charactersData, setCharactersData] = useState([]);
 	const [posX, setPosX] = useState("");
 	const [posY, setPosY] = useState("");
 	const [displayCharMenu, setDisplayCharMenu] = useState(false);
 	const [charArray, setCharArray] = useState([]);
 	const [gameOver, setGameOver] = useState(false);
 	const history = useHistory();
+	const { setData } = useData();
+	const { currentUser } = useAuth();
 
 	function handleClick(e) {
 		let border = e.target.getBoundingClientRect();
@@ -63,6 +69,15 @@ export default function GameMain(props) {
 		setDifficulty(false);
 		setLoading(true);
 		setMapData();
+	}
+	function dataObject(name, difficulty, map, time) {
+		let obj = {
+			name,
+			difficulty,
+			map,
+			time,
+		};
+		return obj;
 	}
 	function checkIfCharFound(e) {
 		setDisplayCharMenu((display) => !display);
@@ -80,16 +95,24 @@ export default function GameMain(props) {
 		}
 		checkGameOver();
 	}
-	function checkGameOver() {
+	async function checkGameOver() {
 		if (charArray.length === 1) {
 			setGameOver(true);
-
+			await setData(
+				`${map}scoreboard`,
+				dataObject(
+					currentUser.displayName ? currentUser.displayName : "User",
+					difficulty,
+					map,
+					timeInSeconds
+				)
+			);
 			history.push("/scoreboard");
 		}
 	}
 	useEffect(() => {
 		setGameOver(false);
-		setData(Object.keys(mapData));
+		setCharactersData(Object.keys(mapData));
 		setCharArray((arr) => {
 			return Object.keys(mapData).map((char) => {
 				return [...arr, mapData[char]];
@@ -102,7 +125,7 @@ export default function GameMain(props) {
 			{!gameOver && (
 				<>
 					<FlexR>
-						{Data.map((char, i) => {
+						{charactersData.map((char, i) => {
 							return (
 								<div
 									style={{
