@@ -3,8 +3,6 @@ import { timerReducer } from "../reducers/timerReducer";
 
 export default function Timer(props) {
 	const { setTimeInSeconds } = props;
-	/*const [time, setTime] = useState("00:00:00");
-	const start = Date.now();*/
 	const [state, dispatch] = React.useReducer(timerReducer, {
 		start: Date.now(),
 		time: "00:00:00",
