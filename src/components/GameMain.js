@@ -35,6 +35,15 @@ const Image = styled.img`
 	width: 100%;
 	height: 100%;
 `;
+function dataObject(name, difficulty, map, time) {
+	let obj = {
+		name,
+		difficulty,
+		map,
+		time,
+	};
+	return obj;
+}
 export default function GameMain(props) {
 	const {
 		setMap,
@@ -70,15 +79,7 @@ export default function GameMain(props) {
 		setLoading(true);
 		setMapData();
 	}
-	function dataObject(name, difficulty, map, time) {
-		let obj = {
-			name,
-			difficulty,
-			map,
-			time,
-		};
-		return obj;
-	}
+
 	function checkIfCharFound(e) {
 		setDisplayCharMenu((display) => !display);
 		let i = e.target.id;
