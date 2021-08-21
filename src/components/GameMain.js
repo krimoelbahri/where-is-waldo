@@ -83,7 +83,6 @@ export default function GameMain(props) {
 	function checkIfCharFound(e) {
 		setDisplayCharMenu((display) => !display);
 		let i = e.target.id;
-		console.log(charArray[i]);
 		if (
 			posX <= charArray[i][0]["maxX"] &&
 			posX >= charArray[i][0]["minX"] &&
