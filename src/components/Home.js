@@ -39,16 +39,20 @@ export default function Home() {
 	useEffect(() => {
 		if (map && difficulty) getMapData();
 	}, [map, difficulty]);
-	return (
-		<HomeContainer>
-			{(!map || !difficulty) && (
-				<SelectMap
-					setMap={setMap}
-					setMapSrc={setMapSrc}
-					setDifficulty={setDifficulty}
-				/>
-			)}
-			{!loading && (
+
+	//Rendering Loading component
+	if (map && difficulty && loading) {
+		return (
+			<HomeContainer>
+				<h1>LOADING ...!</h1>
+			</HomeContainer>
+		);
+	}
+
+	//rendering main Game component when loading is done
+	if (!loading) {
+		return (
+			<HomeContainer>
 				<GameMain
 					setMap={setMap}
 					map={map}
@@ -59,7 +63,20 @@ export default function Home() {
 					mapData={mapData}
 					imgSrc={mapSrc}
 				/>
-			)}
-		</HomeContainer>
-	);
+			</HomeContainer>
+		);
+	}
+
+	//rendering Select Map and difficulty component
+	if (!map || !difficulty) {
+		return (
+			<HomeContainer>
+				<SelectMap
+					setMap={setMap}
+					setMapSrc={setMapSrc}
+					setDifficulty={setDifficulty}
+				/>
+			</HomeContainer>
+		);
+	}
 }
