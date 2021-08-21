@@ -18,27 +18,26 @@ export default function Home() {
 	const [loading, setLoading] = useState(true);
 	const { getData } = useData();
 
-	async function getMapData() {
-		const result = await getData(map, difficulty);
-		if (result.exists()) {
-			setMapData(result.data());
-			setLoading(false);
-		} else {
-			setMapData("");
-			setMap(false);
-			setMapSrc("");
-			setDifficulty(false);
-		}
-	}
-
 	useEffect(() => {
 		setMap(false);
 		setMapSrc("");
 		setDifficulty(false);
 	}, []);
 	useEffect(() => {
+		async function getMapData() {
+			const result = await getData(map, difficulty);
+			if (result.exists()) {
+				setMapData(result.data());
+				setLoading(false);
+			} else {
+				setMapData("");
+				setMap(false);
+				setMapSrc("");
+				setDifficulty(false);
+			}
+		}
 		if (map && difficulty) getMapData();
-	}, [map, difficulty]);
+	}, [map, difficulty, getData]);
 
 	//Rendering Loading component
 	if (map && difficulty && loading) {
