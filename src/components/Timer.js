@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { timerReducer } from "../reducers/timerReducer";
 
 export default function Timer(props) {
 	const { setTimeInSeconds } = props;
-	const [time, setTime] = useState("00:00:00");
-	const start = Date.now();
+	/*const [time, setTime] = useState("00:00:00");
+	const start = Date.now();*/
+	const [state, dispatch] = React.useReducer(timerReducer, {
+		start: Date.now(),
+		time: "00:00:00",
+		timeInSeconds: 0,
+	});
 
-	function timer() {
-		var delta = Date.now() - start; // milliSeconds elapsed since start
-		let output = new Date(delta).toISOString().substr(11, 8); // To HH:MM:SS
-		let seconds = Math.floor(delta / 1000); // converting to seconds
-		setTimeInSeconds(seconds);
-		setTime(output);
-	}
 	useEffect(() => {
-		let interval = setInterval(() => timer(), 1000);
+		let interval = setInterval(() => dispatch("start"), 1000);
 		return () => {
 			clearInterval(interval);
 		};
 	}, []);
-	return <div>{time}</div>;
+	useEffect(() => {
+		setTimeInSeconds(state.timeInSeconds);
+	}, [setTimeInSeconds, state.timeInSeconds]);
+	return <div>{state.time}</div>;
 }
