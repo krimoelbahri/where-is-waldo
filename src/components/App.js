@@ -4,6 +4,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { HomePrivateRoute, LoginPrivateRoute } from "./PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 import { DataProvider } from "../context/DataContext";
+import { MapDataProvider } from "../context/MapDataContext";
 import Home from "./Home";
 import Header from "./Header";
 import SignUp from "./SignUp";
@@ -23,17 +24,19 @@ function App() {
 	return (
 		<HashRouter className='App'>
 			<AuthProvider>
-				<HeaderContainer className='App-header'>
-					<Header />
-				</HeaderContainer>
-				<DataProvider>
-					<Switch>
-						<HomePrivateRoute exact path='/' component={Home} />
-						<LoginPrivateRoute exact path='/login' component={LogIn} />
-						<LoginPrivateRoute exact path='/signup' component={SignUp} />
-						<Route exact path='/scoreboard' component={ScoreBoard} />
-					</Switch>
-				</DataProvider>
+				<MapDataProvider>
+					<HeaderContainer className='App-header'>
+						<Header />
+					</HeaderContainer>
+					<DataProvider>
+						<Switch>
+							<HomePrivateRoute exact path='/' component={Home} />
+							<LoginPrivateRoute exact path='/login' component={LogIn} />
+							<LoginPrivateRoute exact path='/signup' component={SignUp} />
+							<Route exact path='/scoreboard' component={ScoreBoard} />
+						</Switch>
+					</DataProvider>
+				</MapDataProvider>
 			</AuthProvider>
 		</HashRouter>
 	);
