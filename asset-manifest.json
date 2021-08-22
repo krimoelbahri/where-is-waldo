@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/where-is-waldo/static/css/main.fa21363b.chunk.css",
-    "main.js": "/where-is-waldo/static/js/main.debbef7e.chunk.js",
-    "main.js.map": "/where-is-waldo/static/js/main.debbef7e.chunk.js.map",
+    "main.js": "/where-is-waldo/static/js/main.d718be0b.chunk.js",
+    "main.js.map": "/where-is-waldo/static/js/main.d718be0b.chunk.js.map",
     "runtime-main.js": "/where-is-waldo/static/js/runtime-main.23571f4e.js",
     "runtime-main.js.map": "/where-is-waldo/static/js/runtime-main.23571f4e.js.map",
-    "static/js/2.da00e1a2.chunk.js": "/where-is-waldo/static/js/2.da00e1a2.chunk.js",
-    "static/js/2.da00e1a2.chunk.js.map": "/where-is-waldo/static/js/2.da00e1a2.chunk.js.map",
+    "static/js/2.dfc5af1d.chunk.js": "/where-is-waldo/static/js/2.dfc5af1d.chunk.js",
+    "static/js/2.dfc5af1d.chunk.js.map": "/where-is-waldo/static/js/2.dfc5af1d.chunk.js.map",
     "index.html": "/where-is-waldo/index.html",
     "static/css/main.fa21363b.chunk.css.map": "/where-is-waldo/static/css/main.fa21363b.chunk.css.map",
-    "static/js/2.da00e1a2.chunk.js.LICENSE.txt": "/where-is-waldo/static/js/2.da00e1a2.chunk.js.LICENSE.txt",
+    "static/js/2.dfc5af1d.chunk.js.LICENSE.txt": "/where-is-waldo/static/js/2.dfc5af1d.chunk.js.LICENSE.txt",
     "static/media/gameImage.b9340606.jpg": "/where-is-waldo/static/media/gameImage.b9340606.jpg",
     "static/media/gameImage2.272f71d5.png": "/where-is-waldo/static/media/gameImage2.272f71d5.png",
     "static/media/gameImage3.9736162a.jpg": "/where-is-waldo/static/media/gameImage3.9736162a.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.23571f4e.js",
-    "static/js/2.da00e1a2.chunk.js",
+    "static/js/2.dfc5af1d.chunk.js",
     "static/css/main.fa21363b.chunk.css",
-    "static/js/main.debbef7e.chunk.js"
+    "static/js/main.d718be0b.chunk.js"
   ]
 }
