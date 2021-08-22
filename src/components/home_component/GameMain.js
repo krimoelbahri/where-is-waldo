@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
-import { useData } from "../context/DataContext";
-import { useAuth } from "../context/AuthContext";
+import { useData } from "../../context/DataContext";
+import { useAuth } from "../../context/AuthContext";
+import { useMapData } from "../../context/MapDataContext";
 import CharMenu from "./CharMenu";
 import Timer from "./Timer";
 
@@ -44,17 +45,22 @@ function dataObject(name, difficulty, map, time) {
 	};
 	return obj;
 }
-export default function GameMain(props) {
+
+export default function GameMain() {
 	const {
-		setMap,
 		map,
-		setDifficulty,
-		difficulty,
-		setLoading,
-		setMapData,
+		setMap,
+		mapImgSrc,
 		mapData,
-		imgSrc,
-	} = props;
+		setMapData,
+		difficulty,
+		setDifficulty,
+		setLoading,
+	} = useMapData();
+	const history = useHistory();
+	const { setData } = useData();
+	const { currentUser } = useAuth();
+
 	const [timeInSeconds, setTimeInSeconds] = useState(0);
 	const [charactersData, setCharactersData] = useState([]);
 	const [posX, setPosX] = useState("");
@@ -62,9 +68,6 @@ export default function GameMain(props) {
 	const [displayCharMenu, setDisplayCharMenu] = useState(false);
 	const [charArray, setCharArray] = useState([]);
 	const [gameOver, setGameOver] = useState(false);
-	const history = useHistory();
-	const { setData } = useData();
-	const { currentUser } = useAuth();
 
 	function handleClick(e) {
 		let border = e.target.getBoundingClientRect();
@@ -74,10 +77,10 @@ export default function GameMain(props) {
 	}
 
 	function handleGoBack() {
-		setMap(false);
-		setDifficulty(false);
+		setMap("");
+		setDifficulty("");
 		setLoading(true);
-		setMapData();
+		setMapData([]);
 	}
 
 	function checkIfCharFound(e) {
@@ -95,6 +98,7 @@ export default function GameMain(props) {
 		}
 		checkGameOver();
 	}
+
 	async function checkGameOver() {
 		if (charArray.length === 1) {
 			setGameOver(true);
@@ -107,17 +111,21 @@ export default function GameMain(props) {
 					timeInSeconds
 				)
 			);
+			setLoading(true);
 			history.push("/scoreboard");
 		}
 	}
+
 	useEffect(() => {
-		setGameOver(false);
-		setCharactersData(Object.keys(mapData));
-		setCharArray((arr) => {
-			return Object.keys(mapData).map((char) => {
-				return [...arr, mapData[char]];
+		if (mapData) {
+			setGameOver(false);
+			setCharactersData(Object.keys(mapData));
+			setCharArray((arr) => {
+				return Object.keys(mapData).map((char) => {
+					return [...arr, mapData[char]];
+				});
 			});
-		});
+		}
 	}, [mapData]);
 
 	return (
@@ -150,7 +158,7 @@ export default function GameMain(props) {
 					</FlexR>
 
 					<ImageContainer>
-						<Image onClick={handleClick} src={imgSrc} alt='Game' />
+						<Image onClick={handleClick} src={mapImgSrc} alt='Game' />
 					</ImageContainer>
 
 					{displayCharMenu && (
